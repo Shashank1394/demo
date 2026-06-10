@@ -1,81 +1,93 @@
 import { JSX } from "react";
 import Link from "next/link";
-import { Field } from "@sitecore-content-sdk/nextjs";
 import { ComponentProps } from "lib/component-props";
 
-interface CardItem {
+type Card = {
   id: string;
   name: string;
-  displayName: string;
-  url?: string;
-  fields: {
-    Title?: Field<string>;
-    Category?: {
-      name: string;
-      displayName: string;
+  path: string;
+  title?: {
+    jsonValue?: {
+      value?: string;
     };
   };
-}
-
-interface CardsFields {
-  items: CardItem[];
-}
+  description?: {
+    jsonValue?: {
+      value?: string;
+    };
+  };
+  image?: {
+    jsonValue?: {
+      value?: {
+        src?: string;
+        alt?: string;
+      };
+    };
+  };
+  category?: {
+    jsonValue?: {
+      name?: string;
+    } | null;
+  };
+};
 
 export type CardsGridProps = ComponentProps & {
-  fields: CardsFields;
-  page?: {
-    layout?: {
-      sitecore?: {
-        route?: {
-          name?: string;
-        };
+  fields?: {
+    data?: {
+      currentPage?: {
+        name?: string;
+      };
+      cards?: {
+        results?: Card[];
       };
     };
   };
 };
 
 export const Default = (props: CardsGridProps): JSX.Element => {
-  const { params, fields, page } = props;
-  const { RenderingIdentifier, styles } = params;
+  const routeName =
+    props.fields?.data?.currentPage?.name?.toLowerCase() || "home";
 
-  const routeName = page?.layout?.sitecore?.route?.name?.toLowerCase();
+  const allCards =
+    props.fields?.data?.cards?.results?.filter(
+      (card) => card.name !== "__Standard Values" && card.category?.jsonValue,
+    ) || [];
 
-  const cards =
-    fields?.items?.filter((item) => {
-      // Ignore category pages (Basic, Premium)
-      if (!item.fields?.Category) {
-        return false;
-      }
+  let cards = allCards;
 
-      // Home page -> show all cards
-      if (!routeName || routeName === "home" || routeName === "demo") {
-        return true;
-      }
-
-      // Category pages -> filter cards
-      return item.fields.Category.name.toLowerCase() === routeName;
-    }) ?? [];
+  if (routeName === "basic" || routeName === "premium") {
+    cards = allCards.filter(
+      (card) => card.category?.jsonValue?.name?.toLowerCase() === routeName,
+    );
+  }
 
   return (
-    <section
-      className={`component py-12 px-4 ${styles || ""}`}
-      id={RenderingIdentifier}
-    >
+    <section className="component py-12 px-4">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
-            <Link
-              key={card.id}
-              href={card.url || `/cards/${card.name.toLowerCase()}`}
-              className="group"
-            >
-              <div className="h-full rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <h3 className="mb-3 text-xl font-semibold text-gray-900 group-hover:text-blue-600">
-                  {card.fields.Title?.value}
-                </h3>
+            <Link key={card.id} href={`/cards/${card.name}`} className="group">
+              <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                {card.image?.jsonValue?.value?.src && (
+                  <img
+                    src={card.image.jsonValue.value.src}
+                    alt={card.image.jsonValue.value.alt || ""}
+                    className="h-56 w-full object-cover"
+                  />
+                )}
 
-                <div className="mt-4 text-sm font-medium text-blue-600">
-                  Read more →
+                <div className="p-6">
+                  <h3 className="mb-2 text-xl font-semibold">
+                    {card.title?.jsonValue?.value}
+                  </h3>
+
+                  <p className="text-gray-600">
+                    {card.description?.jsonValue?.value}
+                  </p>
+
+                  <div className="mt-4 text-sm font-medium text-blue-600">
+                    Read more →
+                  </div>
                 </div>
               </div>
             </Link>
