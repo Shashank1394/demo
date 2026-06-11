@@ -1,6 +1,7 @@
 import { JSX } from "react";
 import Link from "next/link";
 import { ComponentProps } from "lib/component-props";
+import { slugify } from "lib/slugify";
 
 type Card = {
   id: string;
@@ -66,7 +67,11 @@ export const Default = (props: CardsGridProps): JSX.Element => {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
-            <Link key={card.id} href={`/cards/${card.name}`} className="group">
+            <Link
+              key={card.id}
+              href={`/cards/${slugify(card.name)}`}
+              className="group"
+            >
               <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 {card.image?.jsonValue?.value?.src && (
                   <img

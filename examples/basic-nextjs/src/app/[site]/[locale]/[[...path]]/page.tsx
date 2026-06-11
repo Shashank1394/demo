@@ -29,23 +29,47 @@ export default async function Page({ params }: PageProps) {
   // Set site and locale to be available in src/i18n/request.ts for fetching the dictionary
   setRequestLocale(`${site}_${locale}`);
 
+  const currentPath = path ?? [];
+
+  const isCardDetail =
+    currentPath.length === 2 &&
+    currentPath[0].toLowerCase() === "cards" &&
+    !["basic", "premium", "card-details"].includes(
+      currentPath[1].toLowerCase(),
+    );
+
+  const sitecorePath = isCardDetail ? ["cards", "card-details"] : currentPath;
+
+  const cardSlug = isCardDetail ? currentPath[1] : undefined;
+
   // Fetch the page data from Sitecore
   let page;
+
   if (draft.isEnabled) {
     const headers = await nextHeaders();
     const previewData = client.getPreviewData(headers);
+
     if (isDesignLibraryPreviewData(previewData)) {
       page = await client.getDesignLibraryData(previewData);
     } else {
       page = await client.getPreview(previewData);
     }
   } else {
-    page = await client.getPage(path ?? [], { site, locale });
+    page = await client.getPage(sitecorePath, {
+      site,
+      locale,
+    });
   }
 
   // If the page is not found, return a 404
   if (!page) {
     notFound();
+  }
+
+  // Inject slug into Sitecore context
+  if (cardSlug && page?.layout?.sitecore?.context) {
+    (page.layout.sitecore.context as Record<string, unknown>).cardSlug =
+      cardSlug;
   }
 
   // Fetch the component data from Sitecore (Likely will be deprecated)
@@ -95,7 +119,21 @@ export const generateMetadata = async ({ params }: PageProps) => {
   const canonicalUrl = baseUrl ? `${baseUrl}${pathSegment}` : undefined;
 
   // The same call as for rendering the page. Should be cached by default react behavior
-  const page = await client.getPage(path ?? [], { site, locale });
+  const currentPath = path ?? [];
+
+  const isCardDetail =
+    currentPath.length === 2 &&
+    currentPath[0].toLowerCase() === "cards" &&
+    !["basic", "premium", "card-details"].includes(
+      currentPath[1].toLowerCase(),
+    );
+
+  const sitecorePath = isCardDetail ? ["cards", "card-details"] : currentPath;
+
+  const page = await client.getPage(sitecorePath, {
+    site,
+    locale,
+  });
   const fields = page?.layout.sitecore.route?.fields as RouteFields;
 
   // Parse keywords from comma-separated string to array
