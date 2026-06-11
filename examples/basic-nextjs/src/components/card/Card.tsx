@@ -51,9 +51,11 @@ export const Default = (props: CardProps): JSX.Element => {
       (card) => card.name !== "__Standard Values",
     ) ?? [];
 
-  const card = slug
-    ? cards.find((c) => slugify(c.name) === slugify(slug))
-    : cards[0];
+  const isEditing = props.page?.layout?.sitecore?.context?.pageEditing;
+
+  const card = isEditing
+    ? cards[0]
+    : cards.find((c) => slugify(c.name) === slugify(slug ?? ""));
 
   if (!card) {
     return <div className="py-10 text-center">Card not found: {slug}</div>;
