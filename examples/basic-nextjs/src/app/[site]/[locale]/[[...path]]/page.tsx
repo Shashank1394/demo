@@ -26,24 +26,12 @@ export default async function Page({ params }: PageProps) {
   const { site, locale, path } = await params;
   const draft = await draftMode();
 
-  // Set site and locale to be available in src/i18n/request.ts for fetching the dictionary
   setRequestLocale(`${site}_${locale}`);
 
   const currentPath = path ?? [];
 
-  const isCardDetail =
-    currentPath.length === 2 &&
-    currentPath[0].toLowerCase() === "cards" &&
-    !["basic", "premium", "card-details"].includes(
-      currentPath[1].toLowerCase(),
-    );
-
-  const sitecorePath = isCardDetail ? ["cards", "card-details"] : currentPath;
-
-  const cardSlug = isCardDetail ? currentPath[1] : undefined;
-
-  // Fetch the page data from Sitecore
   let page;
+  let cardSlug: string | undefined;
 
   if (draft.isEnabled) {
     const headers = await nextHeaders();
@@ -55,24 +43,36 @@ export default async function Page({ params }: PageProps) {
       page = await client.getPreview(previewData);
     }
   } else {
-    page = await client.getPage(sitecorePath, {
+    // First try to load the requested route directly
+    page = await client.getPage(currentPath, {
       site,
       locale,
     });
+
+    // Route not found? Treat it as a card detail route
+    if (
+      !page &&
+      currentPath.length === 2 &&
+      currentPath[0].toLowerCase() === "cards"
+    ) {
+      cardSlug = currentPath[1];
+
+      page = await client.getPage(["cards", "card-details"], {
+        site,
+        locale,
+      });
+    }
   }
 
-  // If the page is not found, return a 404
   if (!page) {
     notFound();
   }
 
-  // Inject slug into Sitecore context
   if (cardSlug && page?.layout?.sitecore?.context) {
     (page.layout.sitecore.context as Record<string, unknown>).cardSlug =
       cardSlug;
   }
 
-  // Fetch the component data from Sitecore (Likely will be deprecated)
   const componentProps = await client.getComponentData(
     page.layout,
     {},
@@ -88,56 +88,55 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-// This function gets called at build and export time to determine
-// pages for SSG ("paths", as tokenized array).
 export const generateStaticParams = async () => {
   if (process.env.NODE_ENV !== "development" && scConfig.generateStaticPaths) {
-    // Filter sites to only include the sites this starter is designed to serve.
-    // This prevents cross-site build errors when multiple starters share the same XM Cloud instance.
     const defaultSite = scConfig.defaultSite;
+
     const allowedSites = defaultSite
       ? sites
           .filter((site: SiteInfo) => site.name === defaultSite)
           .map((site: SiteInfo) => site.name)
       : sites.map((site: SiteInfo) => site.name);
+
     return await client.getAppRouterStaticParams(
       allowedSites,
       routing.locales.slice(),
     );
   }
+
   return [];
 };
 
-// Metadata fields for the page.
 export const generateMetadata = async ({ params }: PageProps) => {
   const baseUrl = getBaseUrl();
 
   const { path, site, locale } = await params;
 
-  // Canonical URL: base URL + content path only (no site/locale segments)
   const pathSegment = path?.length ? `/${path.join("/")}` : "";
   const canonicalUrl = baseUrl ? `${baseUrl}${pathSegment}` : undefined;
 
-  // The same call as for rendering the page. Should be cached by default react behavior
   const currentPath = path ?? [];
 
-  const isCardDetail =
-    currentPath.length === 2 &&
-    currentPath[0].toLowerCase() === "cards" &&
-    !["basic", "premium", "card-details"].includes(
-      currentPath[1].toLowerCase(),
-    );
-
-  const sitecorePath = isCardDetail ? ["cards", "card-details"] : currentPath;
-
-  const page = await client.getPage(sitecorePath, {
+  let page = await client.getPage(currentPath, {
     site,
     locale,
   });
+
+  if (
+    !page &&
+    currentPath.length === 2 &&
+    currentPath[0].toLowerCase() === "cards"
+  ) {
+    page = await client.getPage(["cards", "card-details"], {
+      site,
+      locale,
+    });
+  }
+
   const fields = page?.layout.sitecore.route?.fields as RouteFields;
 
-  // Parse keywords from comma-separated string to array
   const keywordsString = fields?.metadataKeywords?.value?.toString() || "";
+
   const keywords = keywordsString
     ? keywordsString.split(",").map((k: string) => k.trim())
     : [];
