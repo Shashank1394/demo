@@ -37,6 +37,9 @@ export type CardProps = ComponentProps & {
         };
       };
     };
+    mode?: {
+      isEditing?: boolean;
+    };
   };
 };
 
@@ -45,28 +48,44 @@ export const Default = (props: CardProps): JSX.Element => {
   const { RenderingIdentifier, styles } = params;
 
   const slug = props.page?.layout?.sitecore?.context?.cardSlug;
+  const isEditing = props.page?.mode?.isEditing;
+
+  const datasourceId = props.rendering?.dataSource
+    ?.replace(/-/g, "")
+    .toUpperCase();
 
   const cards =
     props.fields?.data?.cards?.results?.filter(
       (card) => card.name !== "__Standard Values",
     ) ?? [];
 
-  const card = slug
+  const slugCard = slug
     ? cards.find((c) => slugify(c.name) === slugify(slug))
-    : cards[0];
+    : undefined;
+
+  const datasourceCard = cards.find((c) => c.id.toUpperCase() === datasourceId);
+
+  const card = isEditing
+    ? datasourceCard
+    : (slugCard ?? datasourceCard ?? cards[0]);
+
+  console.log("Card Context", {
+    slug,
+    datasource: props.rendering?.dataSource,
+    datasourceId,
+    selectedCard: card?.name,
+    isEditing,
+  });
 
   if (!card) {
-    return <div className="py-10 text-center">Card not found: {slug}</div>;
+    return <div className="py-10 text-center">Card not found</div>;
   }
-  console.log("DATASOURCE", props.rendering?.dataSource);
+
   return (
     <section
       className={`component py-16 px-4 ${styles || ""}`}
       id={RenderingIdentifier}
     >
-      <div style={{ color: "red", fontSize: "20px" }}>
-        Datasource: {props.rendering?.dataSource}
-      </div>
       <div className="mx-auto max-w-5xl">
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           {card.image?.jsonValue && (
