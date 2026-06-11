@@ -1,38 +1,25 @@
 import React, { JSX } from "react";
-import { Image, ImageField } from "@sitecore-content-sdk/nextjs";
+import { Image } from "@sitecore-content-sdk/nextjs";
 import { ComponentProps } from "lib/component-props";
-import { slugify } from "src/lib/slugify";
+import { CardData } from "lib/card-service";
 
-interface CardResult {
-  id: string;
-  name: string;
-  title: {
-    jsonValue: {
-      value: string;
-    };
-  };
-  description: {
-    jsonValue: {
-      value: string;
-    };
-  };
-  image: {
-    jsonValue: ImageField;
-  };
-}
+// ─────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────
 
 export type CardProps = ComponentProps & {
-  fields?: {
-    data?: {
-      cards?: {
-        results?: CardResult[];
-      };
-    };
+  params: {
+    RenderingIdentifier?: string;
+    styles?: string;
   };
+  // Sitecore context is passed through ComponentProps via the SDK.
+  // page.tsx injects cardData and cardSlug into
+  // page.layout.sitecore.context before this component renders.
   page?: {
     layout?: {
       sitecore?: {
         context?: {
+          cardData?: CardData;
           cardSlug?: string;
         };
       };
@@ -43,44 +30,59 @@ export type CardProps = ComponentProps & {
   };
 };
 
+// ─────────────────────────────────────────────
+// Component
+// ─────────────────────────────────────────────
+
+/**
+ * Card component — reads data injected into Sitecore context by page.tsx.
+ *
+ * No GraphQL fetch happens here. page.tsx already:
+ *   1. Detects /cards/[slug] routes
+ *   2. Calls getCardBySlug(slug) once
+ *   3. Injects the result into page.layout.sitecore.context.cardData
+ *
+ * This component just reads props.page.layout.sitecore.context.cardData.
+ */
 export const Default = (props: CardProps): JSX.Element => {
-  const { params } = props;
+  const { params, page } = props;
   const { RenderingIdentifier, styles } = params;
 
-  const slug = props.page?.layout?.sitecore?.context?.cardSlug;
-  const isEditing = props.page?.mode?.isEditing;
+  const isEditing = page?.mode?.isEditing;
+  const card = page?.layout?.sitecore?.context?.cardData;
 
-  const datasourceId = props.rendering?.dataSource
-    ?.replace(/-/g, "")
-    .toUpperCase();
-
-  const cards =
-    props.fields?.data?.cards?.results?.filter(
-      (card) => card.name !== "__Standard Values",
-    ) ?? [];
-
-  const slugCard = slug
-    ? cards.find((c) => slugify(c.name) === slugify(slug))
-    : undefined;
-
-  const datasourceCard = cards.find((c) => c.id.toUpperCase() === datasourceId);
-
-  const card = isEditing
-    ? datasourceCard
-    : (slugCard ?? datasourceCard ?? cards[0]);
-
-  console.log("Card Context", {
-    slug,
-    datasource: props.rendering?.dataSource,
-    datasourceId,
-    selectedCard: card?.name,
-    isEditing,
-  });
-
-  if (!card) {
-    return <div className="py-10 text-center">Card not found</div>;
+  // ── Editing mode placeholder ───────────────────────────────────────────────
+  // In the Pages editor, context.cardData won't be set because the editor
+  // loads card-details directly (not via /cards/[slug]). Show a placeholder
+  // so the component is visible and selectable in the editor.
+  if (isEditing && !card) {
+    return (
+      <section
+        className={`component py-16 px-4 ${styles || ""}`}
+        id={RenderingIdentifier}
+      >
+        <div className="mx-auto max-w-5xl">
+          <div className="overflow-hidden rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 p-8 text-center text-gray-400">
+            <p className="text-lg font-medium">Card Preview</p>
+            <p className="text-sm mt-1">
+              Card data is available at runtime via the /cards/[slug] route.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
   }
 
+  // ── Runtime: no card data found ───────────────────────────────────────────
+  if (!card) {
+    return (
+      <div className="py-10 text-center text-gray-400">
+        Card data not found.
+      </div>
+    );
+  }
+
+  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <section
       className={`component py-16 px-4 ${styles || ""}`}
@@ -88,7 +90,7 @@ export const Default = (props: CardProps): JSX.Element => {
     >
       <div className="mx-auto max-w-5xl">
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-          {card.image?.jsonValue && (
+          {card.image?.jsonValue?.value?.src && (
             <Image
               field={card.image.jsonValue}
               className="h-100 w-full object-cover"
@@ -96,13 +98,17 @@ export const Default = (props: CardProps): JSX.Element => {
           )}
 
           <div className="p-8">
-            <h1 className="mb-4 text-4xl font-bold text-gray-900">
-              {card.title?.jsonValue?.value}
-            </h1>
+            {card.title?.jsonValue?.value && (
+              <h1 className="mb-4 text-4xl font-bold text-gray-900">
+                {card.title.jsonValue.value}
+              </h1>
+            )}
 
-            <p className="text-lg leading-relaxed text-gray-700">
-              {card.description?.jsonValue?.value}
-            </p>
+            {card.description?.jsonValue?.value && (
+              <p className="text-lg leading-relaxed text-gray-700">
+                {card.description.jsonValue.value}
+              </p>
+            )}
           </div>
         </div>
       </div>
