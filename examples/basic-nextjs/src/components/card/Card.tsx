@@ -58,12 +58,15 @@ export const Default = (props: CardProps): JSX.Element => {
   if (!card) {
     return <div className="py-10 text-center">Card not found: {slug}</div>;
   }
-
+  console.log("DATASOURCE", props.rendering?.dataSource);
   return (
     <section
       className={`component py-16 px-4 ${styles || ""}`}
       id={RenderingIdentifier}
     >
+      <div style={{ color: "red", fontSize: "20px" }}>
+        Datasource: {props.rendering?.dataSource}
+      </div>
       <div className="mx-auto max-w-5xl">
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           {card.image?.jsonValue && (
