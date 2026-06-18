@@ -5,6 +5,7 @@ import { Form } from '@sitecore-content-sdk/nextjs';
 
 // end of built-in components
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
+import * as cardgridprops from 'src/components/card-grid/card-grid.props';
 import * as CardGrid from 'src/components/card-grid/CardGrid';
 
 export const componentMap = new Map<string, NextjsContentSdkComponent>([
@@ -12,6 +13,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['FEaaSWrapper', FEaaSServerWrapper],
   ['Form', { ...Form, componentType: 'client' }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
+  ['card-grid', { ...cardgridprops }],
   ['CardGrid', { ...CardGrid }],
 ]);
 
