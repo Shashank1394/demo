@@ -33,10 +33,10 @@ const CardGrid = (props: CardGridProps) => {
                 />
               )}
 
-              {card.fields?.RichText && (
+              {card.fields?.Copy && (
                 <RichText
                   tag="p"
-                  field={card.fields.RichText}
+                  field={card.fields.Copy}
                   className="text-gray-800"
                 />
               )}
