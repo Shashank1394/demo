@@ -12,7 +12,6 @@ import Providers from "src/Providers";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { getBaseUrl } from "lib/utils";
-import { getCardBySlug } from "lib/card-service";
 
 type PageProps = {
   params: Promise<{
@@ -33,7 +32,6 @@ export default async function Page({ params }: PageProps) {
 
   let page;
   let cardSlug: string | undefined;
-  let cardData: unknown = undefined;
 
   if (draft.isEnabled) {
     const headers = await nextHeaders();
@@ -45,25 +43,17 @@ export default async function Page({ params }: PageProps) {
       page = await client.getPreview(previewData);
     }
   } else {
-    // First attempt: resolve as a normal Sitecore route
     page = await client.getPage(currentPath, {
       site,
       locale,
     });
 
-    // Route not found? Treat as dynamic card detail route
     if (
       !page &&
       currentPath.length === 2 &&
       currentPath[0].toLowerCase() === "cards"
     ) {
       cardSlug = currentPath[1];
-
-      cardData = await getCardBySlug(cardSlug);
-
-      if (!cardData) {
-        notFound();
-      }
 
       page = await client.getPage(["cards", "card-details"], {
         site,
@@ -76,17 +66,9 @@ export default async function Page({ params }: PageProps) {
     notFound();
   }
 
-  // Inject custom context
-  if (page?.layout?.sitecore?.context) {
-    const context = page.layout.sitecore.context as Record<string, unknown>;
-
-    if (cardSlug) {
-      context.cardSlug = cardSlug;
-    }
-
-    if (cardData) {
-      context.cardData = cardData;
-    }
+  if (cardSlug && page?.layout?.sitecore?.context) {
+    (page.layout.sitecore.context as Record<string, unknown>).cardSlug =
+      cardSlug;
   }
 
   const componentProps = await client.getComponentData(
