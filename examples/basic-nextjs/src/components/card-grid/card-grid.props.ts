@@ -15,5 +15,6 @@ export interface CardItem {
   fields: {
     Title?: Field<string>;
     Description?: Field<string>;
+    RichText?: Field<string>;
   };
 }

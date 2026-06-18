@@ -1,4 +1,4 @@
-import { Text } from "@sitecore-content-sdk/nextjs";
+import { RichText, Text } from "@sitecore-content-sdk/nextjs";
 import { CardGridProps } from "./card-grid.props";
 
 const CardGrid = (props: CardGridProps) => {
@@ -30,6 +30,14 @@ const CardGrid = (props: CardGridProps) => {
                   tag="p"
                   field={card.fields.Description}
                   className="text-gray-600"
+                />
+              )}
+
+              {card.fields?.RichText && (
+                <RichText
+                  tag="p"
+                  field={card.fields.RichText}
+                  className="text-gray-800"
                 />
               )}
             </article>
