@@ -88,22 +88,29 @@ export default async function Page({ params }: PageProps) {
 }
 
 export const generateStaticParams = async () => {
-  if (process.env.NODE_ENV !== "development" && scConfig.generateStaticPaths) {
-    const defaultSite = scConfig.defaultSite;
+  const defaultSite = scConfig.defaultSite;
 
-    const allowedSites = defaultSite
-      ? sites
-          .filter((site: SiteInfo) => site.name === defaultSite)
-          .map((site: SiteInfo) => site.name)
-      : sites.map((site: SiteInfo) => site.name);
+  const allowedSites = defaultSite
+    ? sites
+        .filter((site: SiteInfo) => site.name === defaultSite)
+        .map((site: SiteInfo) => site.name)
+    : sites.map((site: SiteInfo) => site.name);
 
-    return await client.getAppRouterStaticParams(
-      allowedSites,
-      routing.locales.slice(),
-    );
+  const params = await client.getAppRouterStaticParams(
+    allowedSites,
+    routing.locales.slice(),
+  );
+
+  if (params.length > 0) {
+    return params;
   }
 
-  return [];
+  return [
+    {
+      site: defaultSite || sites[0]?.name || "default",
+      locale: routing.defaultLocale,
+    },
+  ];
 };
 
 export const generateMetadata = async ({ params }: PageProps) => {
@@ -146,23 +153,30 @@ export const generateMetadata = async ({ params }: PageProps) => {
 
   return {
     title: fields?.Title?.value?.toString() || "Page",
+
     description:
       fields?.ogDescription?.value?.toString() ||
       fields?.metadataDescription?.value?.toString() ||
       "Sitecore Next.js Basic Example",
+
     keywords,
+
     ...(canonicalUrl && {
       alternates: {
         canonical: canonicalUrl,
       },
     }),
+
     openGraph: {
       title: fields?.ogTitle?.value?.toString() || "Page",
+
       description:
         fields?.ogDescription?.value?.toString() ||
         fields?.metadataDescription?.value?.toString() ||
         "Sitecore Next.js Basic Example",
+
       url: canonicalUrl,
+
       images: fields?.ogImage?.value?.src || fields?.thumbnailImage?.value?.src,
     },
   };
