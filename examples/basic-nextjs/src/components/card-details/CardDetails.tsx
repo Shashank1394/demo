@@ -1,7 +1,7 @@
 import React from "react";
 import { RichText, Text } from "@sitecore-content-sdk/nextjs";
 import { ComponentProps } from "lib/component-props";
-import { getCardBySlug } from "components/card-details/card-details";
+import { getCardBySlug } from "lib/card-details";
 
 type CardDetailsProps = ComponentProps & {
   page?: {

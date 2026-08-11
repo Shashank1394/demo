@@ -8,7 +8,7 @@ import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-
 import * as Hero from 'src/components/hero/Hero';
 import * as CardGridprops from 'src/components/card-grid/card-grid.props';
 import * as CardGrid from 'src/components/card-grid/CardGrid';
-import * as CardDetails from 'src/components/card-details/card-details';
+import * as CardDetails from 'src/components/card-details/CardDetails';
 
 export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['BYOCWrapper', BYOCServerWrapper],
