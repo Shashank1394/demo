@@ -6,6 +6,7 @@ import sites from ".sitecore/sites.json";
 import { routing } from "src/i18n/routing";
 import scConfig from "sitecore.config";
 import client from "src/lib/sitecore-client";
+import { getPage } from "src/lib/cached-functions";
 import Layout, { RouteFields } from "src/Layout";
 import components from ".sitecore/component-map";
 import Providers from "src/Providers";
@@ -43,7 +44,7 @@ export default async function Page({ params }: PageProps) {
       page = await client.getPreview(previewData);
     }
   } else {
-    page = await client.getPage(currentPath, {
+    page = await getPage(currentPath, {
       site,
       locale,
     });
@@ -55,7 +56,7 @@ export default async function Page({ params }: PageProps) {
     ) {
       cardSlug = currentPath[1];
 
-      page = await client.getPage(["cards", "card-details"], {
+      page = await getPage(["cards", "card-details"], {
         site,
         locale,
       });
@@ -115,7 +116,7 @@ export const generateMetadata = async ({ params }: PageProps) => {
 
   const currentPath = path ?? [];
 
-  let page = await client.getPage(currentPath, {
+  let page = await getPage(currentPath, {
     site,
     locale,
   });
@@ -125,7 +126,7 @@ export const generateMetadata = async ({ params }: PageProps) => {
     currentPath.length === 2 &&
     currentPath[0].toLowerCase() === "cards"
   ) {
-    page = await client.getPage(["cards", "card-details"], {
+    page = await getPage(["cards", "card-details"], {
       site,
       locale,
     });
