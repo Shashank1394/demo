@@ -25,13 +25,6 @@ type PageProps = {
 
 export default async function Page({ params }: PageProps) {
   const { site, locale, path } = await params;
-
-  console.log("========== SITECORE PAGE REQUEST ==========");
-  console.log("site:", site);
-  console.log("locale:", locale);
-  console.log("path:", path);
-  console.log("==========================================");
-
   const draft = await draftMode();
 
   setRequestLocale(`${site}_${locale}`);
