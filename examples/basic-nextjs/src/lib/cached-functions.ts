@@ -7,10 +7,22 @@ export async function getPage(
 ) {
   "use cache";
 
-  return client.getPage(path, {
+  console.log("========== GET PAGE ==========");
+  console.log({
+    path,
+    site,
+    locale,
+    timestamp: new Date().toISOString(),
+  });
+
+  const result = await client.getPage(path, {
     site,
     locale,
   });
+
+  console.log("========== GET PAGE COMPLETE ==========");
+
+  return result;
 }
 
 export async function getErrorPage(
