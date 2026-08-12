@@ -1,6 +1,8 @@
-import { NextRequest } from "next/server";
 import { createSitecoreRevalidateRouteHandler } from "@sitecore-content-sdk/nextjs/route-handler";
+import { revalidateTag } from "next/cache";
+import { NextRequest } from "next/server";
 import sites from ".sitecore/sites.json";
+import { SITECORE_CONTENT_CACHE_TAG } from "src/lib/sitecore-cache";
 
 const { POST: sitecoreRevalidate } = createSitecoreRevalidateRouteHandler({
   sites,
@@ -9,21 +11,14 @@ const { POST: sitecoreRevalidate } = createSitecoreRevalidateRouteHandler({
 });
 
 export async function POST(request: NextRequest) {
-  console.log("========== SITECORE REVALIDATION ==========");
-
-  console.log("User-Agent:", request.headers.get("user-agent"));
-  console.log("Content-Type:", request.headers.get("content-type"));
-
-  const body = await request.clone().text();
-
-  console.log("WEBHOOK BODY:");
-  console.log(body);
-
+  // Experience Edge OnUpdate webhooks contain the changed item identifiers. The
+  // Content SDK maps them to selective tags; this tag also covers datasource
+  // changes that are not directly associated with a route item.
   const response = await sitecoreRevalidate(request);
 
-  console.log("REVALIDATION STATUS:", response.status);
-
-  console.log("============================================");
+  if (response.ok) {
+    revalidateTag(SITECORE_CONTENT_CACHE_TAG, "max");
+  }
 
   return response;
 }

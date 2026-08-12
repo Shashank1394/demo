@@ -1,4 +1,10 @@
-import { ErrorPage } from "@sitecore-content-sdk/nextjs";
+import {
+  buildSitecoreDictionaryCacheTag,
+  collectSitecorePageCacheTags,
+  ErrorPage,
+} from "@sitecore-content-sdk/nextjs";
+import { cacheTag } from "next/cache";
+import { SITECORE_CONTENT_CACHE_TAG } from "./sitecore-cache";
 import client from "./sitecore-client";
 
 export async function getPage(
@@ -7,20 +13,20 @@ export async function getPage(
 ) {
   "use cache";
 
-  console.log("========== GET PAGE ==========");
-  console.log({
-    path,
-    site,
-    locale,
-    timestamp: new Date().toISOString(),
-  });
-
   const result = await client.getPage(path, {
     site,
     locale,
   });
 
-  console.log("========== GET PAGE COMPLETE ==========");
+  cacheTag(
+    SITECORE_CONTENT_CACHE_TAG,
+    ...collectSitecorePageCacheTags({
+      path: `/${path.join("/")}`,
+      site,
+      locale,
+      route: result?.layout.sitecore.route,
+    }),
+  );
 
   return result;
 }
@@ -46,8 +52,15 @@ export async function getDictionary({
 }) {
   "use cache";
 
-  return client.getDictionary({
+  const dictionary = await client.getDictionary({
     site,
     locale,
   });
+
+  cacheTag(
+    SITECORE_CONTENT_CACHE_TAG,
+    buildSitecoreDictionaryCacheTag({ site, locale }),
+  );
+
+  return dictionary;
 }
