@@ -1,0 +1,14 @@
+{
+  "$schema": "../../.sitecore/schemas/ModuleFile.schema.json",
+  "namespace": "test",
+  "items": {
+    "includes": [
+      {
+        "name": "Migration",
+        "path": "/sitecore/templates/Feature/Migration",
+        "scope": "ItemAndDescendants",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      }
+    ]
+  }
+}

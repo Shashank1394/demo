@@ -1,0 +1,25 @@
+﻿---
+ID: "832afef8-6311-456b-96ef-9582fc45be36"
+Parent: "53d9c9f5-cf96-45ab-baf3-61ec06cf817e"
+Template: "53d9c9f5-cf96-45ab-baf3-61ec06cf817e"
+Path: /sitecore/templates/Feature/Migration/Icon Cards/Icon Cards Folder/__Standard Values
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {53D9C9F5-CF96-45AB-BAF3-61EC06CF817E}
+    {EDE898CE-F9DF-413B-B282-DEB88AA81ADD}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260821T065302Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

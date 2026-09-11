@@ -1,0 +1,18 @@
+﻿---
+ID: "86257183-9488-49f3-adb6-7f59400dac7e"
+Parent: "429e7d2c-c5ff-415e-928c-6b4a07ea2623"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Feature/Migration/_Base Templates/_BaseCTA/Data
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260820T080351Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
