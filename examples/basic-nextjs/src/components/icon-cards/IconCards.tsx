@@ -2,15 +2,13 @@ import React, { JSX } from "react";
 import {
   Field,
   Text as ContentSdkText,
-  RichText as ContentSdkRichText,
   Image as ContentSdkImage,
 } from "@sitecore-content-sdk/nextjs";
 import { ComponentProps } from "lib/component-props";
 
 interface Fields {
+  Icon: Field<any>;
   Title: Field<string>;
-  Description: Field<string>;
-  Image: Field<any>;
 }
 
 export type DataProps = ComponentProps & {
@@ -21,18 +19,22 @@ export const Default = ({ params, fields }: DataProps): JSX.Element => {
   const { RenderingIdentifier, styles } = params;
 
   return (
-    <div className={`component data ${styles}`} id={RenderingIdentifier}>
+    <div className={`component icon-card ${styles}`} id={RenderingIdentifier}>
       <div className="component-content">
         {fields ? (
-          <>
-            <ContentSdkText field={fields.Title} tag="h2" />
+          <div className="icon-card">
+            <div className="icon-card__icon">
+              <ContentSdkImage field={fields.Icon} />
+            </div>
 
-            <ContentSdkRichText field={fields.Description} />
-
-            <ContentSdkImage field={fields.Image} />
-          </>
+            <ContentSdkText
+              field={fields.Title}
+              tag="div"
+              className="icon-card__title"
+            />
+          </div>
         ) : (
-          <span className="is-empty-hint">Data</span>
+          <span className="is-empty-hint">Icon Card</span>
         )}
       </div>
     </div>
