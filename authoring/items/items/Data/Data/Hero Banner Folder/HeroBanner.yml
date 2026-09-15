@@ -1,0 +1,32 @@
+﻿---
+ID: "cab6c43e-6832-4039-a889-d6c43a08e0c5"
+Parent: "e607ce02-92d3-4312-b5fc-731c7483b229"
+Template: "b015df60-28d0-4bb5-bb85-13fd76320717"
+Path: /sitecore/content/Migration/migration/Data/Hero Banner Folder/HeroBanner
+DB: master
+Languages:
+  - Language: en
+    Versions:
+      - Version: 1
+        Fields:
+          - ID: "1c4c15ad-51d1-409a-a8a6-b6dfdf0595ea"
+            Hint: Image
+            Value: |
+              <image mediaid="{04DAD0FD-DB66-4070-881F-17264CA257E1}" alt="" height="" width="" hspace="" vspace="" />
+          - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+            Hint: __Created
+            Value: 20260820T092220Z
+          - ID: "54566a2e-f292-4d40-a7ce-522bba31c706"
+            Hint: Title
+            Value: Hero
+          - ID: "5b8e19ce-bee5-4002-87b9-bba7099e7378"
+            Hint: CTA
+            Value: |
+              <link text="migration" anchor="" linktype="internal" class="" title=""  querystring="" id="{5D5AA53E-735B-4A24-96CA-06361A23F140}" />
+          - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+            Hint: __Created by
+            Value: |
+              sitecore\Admin
+          - ID: "9080c0ae-2199-455c-a9d4-0ab88df52c72"
+            Hint: Description
+            Value: lorem epsum

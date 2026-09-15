@@ -1,0 +1,28 @@
+﻿---
+ID: "3e8d488c-c230-495c-8b26-e864caaed340"
+Parent: "91cbfb9a-d432-4f03-9152-db52b97eb342"
+Template: "04646a89-996f-4ee7-878a-ffdbf1f0ef0d"
+Path: /sitecore/layout/Renderings/Feature/Migration/Content/Content
+DB: master
+SharedFields:
+  - ID: "037fe404-dd19-4bf7-8e30-4dadf68b27b0"
+    Hint: componentName
+    Value: Content
+  - ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+    Hint: Datasource Template
+    Value: /sitecore/templates/Feature/Migration/Content/Content
+  - ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+    Hint: Datasource Location
+    Value: "query:$site/*[@@name='Data']/*[@@templatename='Content Folder']|query:$sharedSites/*[@@name='Data']/*[@@templatename='Content Folder']"
+Languages:
+  - Language: en
+    Versions:
+      - Version: 1
+        Fields:
+          - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+            Hint: __Created
+            Value: 20260820T080825Z
+          - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+            Hint: __Created by
+            Value: |
+              sitecore\Admin

@@ -1,0 +1,14 @@
+﻿---
+ID: "ab182ee3-0106-4b33-b280-cafa6bf05820"
+Parent: "aa65db76-6204-4a26-8e8c-fa003e6fbd2f"
+Template: "b241bbfb-10b6-4554-b4df-1922b477191f"
+Path: /sitecore/content/Migration/migration/Data/Media Banner Folder
+DB: master
+Languages:
+  - Language: en
+    Versions:
+      - Version: 1
+        Fields:
+          - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+            Hint: __Created
+            Value: 20260821T063031Z

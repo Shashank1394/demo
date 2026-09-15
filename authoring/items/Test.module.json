@@ -4,8 +4,8 @@
   "items": {
     "includes": [
       {
-        "name": "Migration",
-        "path": "/sitecore/templates/Feature/Migration",
+        "name": "Home",
+        "path": "/sitecore/content/Migration/migration/Home",
         "scope": "ItemAndDescendants",
         "allowedPushOperations": "CreateUpdateAndDelete"
       }

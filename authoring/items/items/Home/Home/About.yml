@@ -1,0 +1,62 @@
+﻿---
+ID: "6ffcb5b7-ff91-4663-a6b6-1ceb76a9695a"
+Parent: "0ab92769-db7b-4fae-9a46-c87881849eab"
+Template: "202be47e-a51d-4099-94a5-6ba8a493c326"
+Path: /sitecore/content/Migration/migration/Home/About
+SharedFields:
+- ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
+  Hint: __Thumbnail
+  Value: |
+    <image mediaid="{E706302C-B2C2-47E7-81AD-C59AD13EE453}" />
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "b0f563bd-900e-4d57-8b28-1d6622cc4609"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{10EA75FA-05F6-4D73-828F-028B1E9316CE}"
+          p:before="*"
+          s:ds="{CAB6C43E-6832-4039-A889-D6C43A08E0C5}"
+          s:id="{2FFDCA48-9C69-4DBC-9465-5671EDC08664}"
+          s:par="CSSStyles&amp;Reset Caching Options&amp;GridParameters=%7B7465D855-992E-4DC2-9855-A03250DFA74B%7D%7C%7BC3767F66-03BE-4587-B22C-C0D28B45C319%7D%7C%7B436C37A1-CC36-4176-97C0-F1C48104E601%7D&amp;FieldNames=%7B38EE9060-1F30-4D95-ADDC-5AB31C4CDCBC%7D&amp;Styles&amp;RenderingIdentifier&amp;DynamicPlaceholderId=1"
+          s:ph="headless-main"
+          s:ccb="Clear on publish" />
+        <r
+          uid="{54D4C210-E676-4AB8-A42F-E870F270F93D}"
+          p:after="*[1=2]"
+          s:ds="{FEBD96BF-B7F7-4C09-BBBA-DBEDE231B823}"
+          s:id="{3E8D488C-C230-495C-8B26-E864CAAED340}"
+          s:par="CSSStyles&amp;Reset Caching Options&amp;GridParameters=%7B7465D855-992E-4DC2-9855-A03250DFA74B%7D%7C%7BC3767F66-03BE-4587-B22C-C0D28B45C319%7D%7C%7B436C37A1-CC36-4176-97C0-F1C48104E601%7D&amp;FieldNames=%7B59725720-65F4-428B-9EA2-839D39E9B0FF%7D&amp;Styles&amp;RenderingIdentifier&amp;DynamicPlaceholderId=2"
+          s:ph="headless-main"
+          s:ccb="Clear on publish" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260903T061428Z
+    - ID: "4bb021cf-fa43-4a51-85d6-00797a42cb4c"
+      Hint: Title
+      Value: About
+    - ID: "4e0720e9-9d50-4ddc-87cf-ecd65e8e94c8"
+      Hint: NavigationTitle
+      Value: About
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "92ca85e3-817e-478e-8af5-94c2d9d517c1"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\mateen.shaikh@techxot.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260915T100211Z

@@ -1,0 +1,21 @@
+﻿---
+ID: "febd96bf-b7f7-4c09-bbba-dbede231b823"
+Parent: "81db39bd-977b-4537-a53f-b176456d5b9e"
+Template: "49e47916-5a9e-4304-92c9-874bd3d9699f"
+Path: /sitecore/content/Migration/migration/Data/Content Folder/Content
+DB: master
+Languages:
+  - Language: en
+    Versions:
+      - Version: 1
+        Fields:
+          - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+            Hint: __Created
+            Value: 20260903T064701Z
+          - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+            Hint: __Created by
+            Value: |
+              sitecore\Admin
+          - ID: "9080c0ae-2199-455c-a9d4-0ab88df52c72"
+            Hint: Description
+            Value: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
