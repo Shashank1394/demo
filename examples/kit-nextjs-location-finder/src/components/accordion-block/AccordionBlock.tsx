@@ -23,7 +23,7 @@ export const Centered: React.FC<AccordionProps> = (props) => {
   return <AccordionBlockCentered {...props} isPageEditing={isEditing} />;
 };
 
-export const FiftyFiftyTitleAbove: React.FC<AccordionProps> = (props) => {
+export const FiftyTitleAbove: React.FC<AccordionProps> = (props) => {
   const { isEditing } = props.page.mode;
 
   return <Accordion5050TitleAbove {...props} isPageEditing={isEditing} />;
@@ -32,11 +32,15 @@ export const FiftyFiftyTitleAbove: React.FC<AccordionProps> = (props) => {
 export const TwoColumnTitleLeft: React.FC<AccordionProps> = (props) => {
   const { isEditing } = props.page.mode;
 
-  return <AccordionBlockTwoColumnTitleLeft {...props} isPageEditing={isEditing} />;
+  return (
+    <AccordionBlockTwoColumnTitleLeft {...props} isPageEditing={isEditing} />
+  );
 };
 
 export const OneColumnTitleLeft: React.FC<AccordionProps> = (props) => {
   const { isEditing } = props.page.mode;
 
-  return <AccordionBlockOneColumnTitleLeft {...props} isPageEditing={isEditing} />;
+  return (
+    <AccordionBlockOneColumnTitleLeft {...props} isPageEditing={isEditing} />
+  );
 };
