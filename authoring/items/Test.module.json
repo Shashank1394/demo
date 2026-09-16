@@ -2,13 +2,6 @@
   "$schema": "../../.sitecore/schemas/ModuleFile.schema.json",
   "namespace": "test",
   "items": {
-    "includes": [
-      {
-        "name": "Home",
-        "path": "/sitecore/content/Migration/migration/Home",
-        "scope": "ItemAndDescendants",
-        "allowedPushOperations": "CreateUpdateAndDelete"
-      }
-    ]
+    "includes": []
   }
 }
