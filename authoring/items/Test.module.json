@@ -2,6 +2,13 @@
   "$schema": "../../.sitecore/schemas/ModuleFile.schema.json",
   "namespace": "test",
   "items": {
-    "includes": []
+    "includes": [
+      {
+        "name": "Headless Variants",
+        "path": "/sitecore/content/Migration/migration/Presentation/Headless Variants",
+        "scope": "ItemAndDescendants",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      }
+    ]
   }
 }

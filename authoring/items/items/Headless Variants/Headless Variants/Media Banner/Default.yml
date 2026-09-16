@@ -1,0 +1,22 @@
+﻿---
+ID: "9f4c82c3-6d3c-483d-b6e7-b8e4bbdfca3e"
+Parent: "af8964fb-84e1-4f73-b0af-54cda73cfce6"
+Template: "4d50cdae-c2d9-4de8-b080-8f992bfb1b55"
+Path: /sitecore/content/Migration/migration/Presentation/Headless Variants/Media Banner/Default
+DB: master
+SharedFields:
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{5DF9B10F-F5B5-4E6A-AD58-08125A701147}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260820T071830Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

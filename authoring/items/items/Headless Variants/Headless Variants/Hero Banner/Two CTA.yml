@@ -1,0 +1,22 @@
+﻿---
+ID: "1596f173-fd68-4bb7-8323-650bce82f2ce"
+Parent: "ca6d5abb-b22f-4fba-bab1-f568e85df345"
+Template: "4d50cdae-c2d9-4de8-b080-8f992bfb1b55"
+Path: /sitecore/content/Migration/migration/Presentation/Headless Variants/Hero Banner/Two CTA
+DB: master
+SharedFields:
+- ID: "e1d5adba-8348-4127-9bb6-455936653839"
+  Hint: CssClass
+  Value: "two-ctas"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260916T071634Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

@@ -1,0 +1,39 @@
+﻿---
+ID: "50d67be6-f761-430c-a4ae-456841915035"
+Parent: "7a00c98c-95d5-4d39-b7c9-a074771b4eca"
+Template: "4d50cdae-c2d9-4de8-b080-8f992bfb1b55"
+Path: /sitecore/content/Migration/migration/Presentation/Headless Variants/ProductComparison/Default
+BranchID: "904334aa-f1bd-4f6c-851f-0267145beaf9"
+SharedFields:
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "25c74aa5-9b01-4b2f-ba9a-017f95220333"
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{8CE00333-3E7B-4475-B3E2-14CDC159C115}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260907T114050Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\mateen.shaikh@techxot.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\mateen.shaikh@techxot.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "876fd49f-965b-459b-8f04-878d98170cfe"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\mateen.shaikh@techxot.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260907T114050Z

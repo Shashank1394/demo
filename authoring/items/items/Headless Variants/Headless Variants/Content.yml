@@ -1,0 +1,29 @@
+﻿---
+ID: "5d01d29c-8331-4dac-959f-a160d60d26ac"
+Parent: "7151c208-7b9a-45b2-98c5-0e7e50f1055b"
+Template: "49c111d0-6867-4798-a724-1f103166e6e9"
+Path: /sitecore/content/Migration/migration/Presentation/Headless Variants/Content
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Office/32x32/masks.png
+- ID: "087c0553-9162-41f5-98d3-87eb0d80edbb"
+  Hint: Compatible Renderings
+  Type: TreelistEx
+  Value: "{2FFDCA48-9C69-4DBC-9465-5671EDC08664}"
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{0FE895A2-63B1-470F-93F4-A166849B13F6}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260820T071830Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
