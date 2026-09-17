@@ -9,7 +9,10 @@ import * as MediaBanner from 'src/components/media-banner/MediaBanner';
 import * as IconCards from 'src/components/icon-cards/IconCards';
 import * as HeroBanner from 'src/components/hero-banner/HeroBanner';
 import * as Hero from 'src/components/hero/Hero';
+import * as ContentDefaultdev from 'src/components/content/ContentDefault.dev';
+import * as ContentBulkContentdev from 'src/components/content/ContentBulkContent.dev';
 import * as Content from 'src/components/content/Content';
+import * as contentprops from 'src/components/content/content.props';
 import * as CardGrid from 'src/components/card-grid/CardGrid';
 import * as cardgridprops from 'src/components/card-grid/card-grid.props';
 import * as CardDetails from 'src/components/card-details/CardDetails';
@@ -24,7 +27,10 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['IconCards', { ...IconCards }],
   ['HeroBanner', { ...HeroBanner }],
   ['Hero', { ...Hero }],
+  ['ContentDefault', { ...ContentDefaultdev }],
+  ['ContentBulkContent', { ...ContentBulkContentdev }],
   ['Content', { ...Content }],
+  ['content', { ...contentprops }],
   ['CardGrid', { ...CardGrid }],
   ['card-grid', { ...cardgridprops }],
   ['CardDetails', { ...CardDetails }],
