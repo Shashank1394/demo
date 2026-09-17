@@ -4,8 +4,8 @@
   "items": {
     "includes": [
       {
-        "name": "Headless Variants",
-        "path": "/sitecore/content/Migration/migration/Presentation/Headless Variants",
+        "name": "Migration Renderings",
+        "path": "/sitecore/layout/Renderings/Feature/Migration",
         "scope": "ItemAndDescendants",
         "allowedPushOperations": "CreateUpdateAndDelete"
       }
