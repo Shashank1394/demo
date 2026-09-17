@@ -7,7 +7,10 @@ import { Form } from '@sitecore-content-sdk/nextjs';
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
 import * as MediaBanner from 'src/components/media-banner/MediaBanner';
 import * as IconCards from 'src/components/icon-cards/IconCards';
+import * as HeroBannerTwoCTAdev from 'src/components/hero-banner/HeroBannerTwoCTA.dev';
+import * as HeroBannerDefaultdev from 'src/components/hero-banner/HeroBannerDefault.dev';
 import * as HeroBanner from 'src/components/hero-banner/HeroBanner';
+import * as herobannerprops from 'src/components/hero-banner/hero-banner.props';
 import * as Hero from 'src/components/hero/Hero';
 import * as ContentDefaultdev from 'src/components/content/ContentDefault.dev';
 import * as ContentBulkContentdev from 'src/components/content/ContentBulkContent.dev';
@@ -25,7 +28,10 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
   ['MediaBanner', { ...MediaBanner }],
   ['IconCards', { ...IconCards }],
+  ['HeroBannerTwoCTA', { ...HeroBannerTwoCTAdev }],
+  ['HeroBannerDefault', { ...HeroBannerDefaultdev }],
   ['HeroBanner', { ...HeroBanner }],
+  ['hero-banner', { ...herobannerprops }],
   ['Hero', { ...Hero }],
   ['ContentDefault', { ...ContentDefaultdev }],
   ['ContentBulkContent', { ...ContentBulkContentdev }],
