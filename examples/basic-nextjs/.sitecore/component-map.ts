@@ -5,8 +5,14 @@ import { Form } from '@sitecore-content-sdk/nextjs';
 
 // end of built-in components
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
+import * as MediaBannerImageDowndev from 'src/components/media-banner/MediaBannerImageDown.dev';
+import * as MediaBannerDefaultdev from 'src/components/media-banner/MediaBannerDefault.dev';
 import * as MediaBanner from 'src/components/media-banner/MediaBanner';
+import * as mediabannerprops from 'src/components/media-banner/media-banner.props';
+import * as IconCardsImageDowndev from 'src/components/icon-cards/IconCardsImageDown.dev';
+import * as IconCardsDefaultdev from 'src/components/icon-cards/IconCardsDefault.dev';
 import * as IconCards from 'src/components/icon-cards/IconCards';
+import * as iconcardsprops from 'src/components/icon-cards/icon-cards.props';
 import * as HeroBannerTwoCTAdev from 'src/components/hero-banner/HeroBannerTwoCTA.dev';
 import * as HeroBannerDefaultdev from 'src/components/hero-banner/HeroBannerDefault.dev';
 import * as HeroBanner from 'src/components/hero-banner/HeroBanner';
@@ -26,8 +32,14 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['FEaaSWrapper', FEaaSServerWrapper],
   ['Form', { ...Form, componentType: 'client' }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
+  ['MediaBannerImageDown', { ...MediaBannerImageDowndev }],
+  ['MediaBannerDefault', { ...MediaBannerDefaultdev }],
   ['MediaBanner', { ...MediaBanner }],
+  ['media-banner', { ...mediabannerprops }],
+  ['IconCardsImageDown', { ...IconCardsImageDowndev }],
+  ['IconCardsDefault', { ...IconCardsDefaultdev }],
   ['IconCards', { ...IconCards }],
+  ['icon-cards', { ...iconcardsprops }],
   ['HeroBannerTwoCTA', { ...HeroBannerTwoCTAdev }],
   ['HeroBannerDefault', { ...HeroBannerDefaultdev }],
   ['HeroBanner', { ...HeroBanner }],

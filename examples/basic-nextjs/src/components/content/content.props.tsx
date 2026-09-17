@@ -1,12 +1,9 @@
-import { ComponentProps } from "../../lib/component-props";
-import { RichTextField } from "@sitecore-content-sdk/nextjs";
+import type { Field } from "@sitecore-content-sdk/nextjs";
+import type { ComponentProps } from "../../lib/component-props";
 
 export type ContentProps = ComponentProps & {
   fields?: {
-    data?: {
-      datasource?: {
-        Description: RichTextField;
-      };
-    };
+    Title?: Field<string>;
+    Description?: Field<string>;
   };
 };

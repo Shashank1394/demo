@@ -5,11 +5,10 @@ import type {
 } from "@sitecore-content-sdk/nextjs";
 import type { ComponentProps } from "../../lib/component-props";
 
-export type HeroBannerProps = ComponentProps & {
+export type MediaBannerProps = ComponentProps & {
   fields?: {
     Image?: ImageField;
     Title?: Field<string>;
-    Description?: Field<string>;
     CTA?: LinkField;
   };
 };
