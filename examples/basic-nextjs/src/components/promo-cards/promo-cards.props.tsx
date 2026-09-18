@@ -8,30 +8,32 @@ import type { ComponentProps } from "../../lib/component-props";
 
 export type PromoCardItem = {
   id: string;
+  url?: string;
   name?: string;
-  Image?: ImageField;
-  Title?: Field<string>;
-  Description?: Field<string>;
-  CTA?: LinkField;
+  displayName?: string;
+  fields?: {
+    Details?: Field<string>;
+    Tag?: Field<string>;
+    Title?: Field<string>;
+    MainImage?: ImageField;
+    MainMdImage?: ImageField;
+    MainSmImage?: ImageField;
+    CTALink?: LinkField;
+    CTATitle?: Field<string>;
+    GaOverrideTagging?: Field<string>;
+    ModalTheme?: Field<string> | null;
+    OpenInModal?: Field<boolean>;
+    MainVideo?: LinkField;
+    VideoType?: Field<string> | null;
+    VidyardId?: Field<string>;
+  };
 };
 
-export type PromoCardsData = {
-  datasource?: {
-    id?: string;
-    name?: string;
-
-    ListTitle?: Field<string>;
-
-    children?: {
-      results?: PromoCardItem[];
-    };
-  };
+export type PromoCardsFields = {
+  items?: PromoCardItem[];
 };
 
 export type PromoCardsProps = ComponentProps & {
-  fields?: {
-    data?: PromoCardsData;
-  };
-
+  fields?: PromoCardsFields;
   variant?: "2-in-row" | "3-in-row" | "4-in-row";
 };
