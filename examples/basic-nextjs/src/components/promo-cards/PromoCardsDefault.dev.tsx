@@ -1,30 +1,80 @@
-import type { PromoCardsProps, PromoCardItem } from "./promo-cards.props";
-import { Default as PromoCard } from "../PromoCard/PromoCard";
+import { Image, Link, RichText, Text } from "@sitecore-content-sdk/nextjs";
 
-type PromoCardsData = {
-  children?: PromoCardItem[];
+import type { PromoCardItem, PromoCardsProps } from "./promo-cards.props";
+
+type PromoCardContentProps = {
+  item: PromoCardItem;
+  columnClass: string;
+};
+
+const PromoCardContent = ({ item, columnClass }: PromoCardContentProps) => {
+  return (
+    <div className={columnClass}>
+      <div className="promo-card">
+        {item.Image && (
+          <div className="promo-card__image">
+            <Image field={item.Image} />
+          </div>
+        )}
+
+        <div className="promo-card__content">
+          {item.Title && (
+            <h3 className="promo-card__title">
+              <Text field={item.Title} />
+            </h3>
+          )}
+
+          {item.Description && (
+            <div className="promo-card__description">
+              <RichText field={item.Description} />
+            </div>
+          )}
+
+          {item.CTA && (
+            <div className="promo-card__cta">
+              <Link field={item.CTA} />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export const PromoCardsDefault = (props: PromoCardsProps) => {
-  const { fields, variant = "2-in-row" } = props;
+  const datasource = props.fields?.data?.datasource;
 
-  const promoCardsData = fields as typeof fields & PromoCardsData;
+  const listTitle = datasource?.ListTitle;
 
-  const children = promoCardsData?.children ?? [];
+  const cards = datasource?.children?.results ?? [];
 
-  const rowClassName = {
-    "2-in-row": "promo-cards__row promo-cards__row--2",
-    "3-in-row": "promo-cards__row promo-cards__row--3",
-    "4-in-row": "promo-cards__row promo-cards__row--4",
-  }[variant];
+  const columnClass = {
+    "2-in-row": "col-12 col-md-6",
+    "3-in-row": "col-12 col-md-6 col-lg-4",
+    "4-in-row": "col-12 col-md-6 col-lg-3",
+  }[props.variant ?? "3-in-row"];
 
   return (
-    <div className={`promo-cards promo-cards--${variant}`}>
+    <div className="promo-cards">
       <div className="component-content">
         <div className="container">
-          <div className={rowClassName}>
-            {children.map((child, index) => (
-              <PromoCard key={child.id ?? index} {...child} />
+          {listTitle && (
+            <div className="row">
+              <div className="col-12">
+                <h2 className="promo-cards__title">
+                  <Text field={listTitle} />
+                </h2>
+              </div>
+            </div>
+          )}
+
+          <div className="row">
+            {cards.map((item) => (
+              <PromoCardContent
+                key={item.id}
+                item={item}
+                columnClass={columnClass}
+              />
             ))}
           </div>
         </div>
