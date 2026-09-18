@@ -43,6 +43,8 @@ const PromoCardContent = ({ item, columnClass }: PromoCardContentProps) => {
 
 export const PromoCardsDefault = (props: PromoCardsProps) => {
   const datasource = props.fields?.data?.datasource;
+  console.log("PromoCardsDefault props:", props);
+  console.log("PromoCardsDefault datasource:", datasource);
 
   const listTitle = datasource?.ListTitle;
 

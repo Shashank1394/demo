@@ -4,6 +4,9 @@ import { BYOCServerWrapper, NextjsContentSdkComponent, FEaaSServerWrapper } from
 import { Form } from '@sitecore-content-sdk/nextjs';
 
 // end of built-in components
+import * as PromoCardsDefaultdev from 'src/components/promo-cards/PromoCardsDefault.dev';
+import * as PromoCards from 'src/components/promo-cards/PromoCards';
+import * as promocardsprops from 'src/components/promo-cards/promo-cards.props';
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
 import * as MediaBannerImageDowndev from 'src/components/media-banner/MediaBannerImageDown.dev';
 import * as MediaBannerDefaultdev from 'src/components/media-banner/MediaBannerDefault.dev';
@@ -31,6 +34,9 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['BYOCWrapper', BYOCServerWrapper],
   ['FEaaSWrapper', FEaaSServerWrapper],
   ['Form', { ...Form, componentType: 'client' }],
+  ['PromoCardsDefault', { ...PromoCardsDefaultdev }],
+  ['PromoCards', { ...PromoCards }],
+  ['promo-cards', { ...promocardsprops }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
   ['MediaBannerImageDown', { ...MediaBannerImageDowndev }],
   ['MediaBannerDefault', { ...MediaBannerDefaultdev }],
