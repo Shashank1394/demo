@@ -5,10 +5,6 @@ export const Default = (props: ComponentProps) => {
   return <PromoCardsDefault {...props} variant="2-in-row" />;
 };
 
-export const TwoInRow = (props: ComponentProps) => {
-  return <PromoCardsDefault {...props} variant="2-in-row" />;
-};
-
 export const ThreeInRow = (props: ComponentProps) => {
   return <PromoCardsDefault {...props} variant="3-in-row" />;
 };
